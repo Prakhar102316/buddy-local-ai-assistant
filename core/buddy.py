@@ -2,6 +2,7 @@ from core.ollama_client import OllamaClient
 from core.conversation import Conversation
 from core.memory_manager import MemoryManager
 from core.memory_detector import MemoryDetector
+from core.ui import UI
 
 
 class Buddy:
@@ -9,7 +10,7 @@ class Buddy:
     def __init__(self):
 
         self.name = "Buddy"
-        self.version = "0.3"
+        self.version = "0.5"
 
         self.client = OllamaClient()
         self.conversation = Conversation()
@@ -19,22 +20,20 @@ class Buddy:
 
     def start(self):
 
-        print("=" * 60)
-        print(f"🤖 {self.name} v{self.version}")
-        print("Type 'exit' to quit.")
-        print("=" * 60)
+        UI.print_banner()
 
         while True:
 
-            user_input = input("\nYou : ")
+            UI.user()
+            user_input = input()
 
             if user_input.lower() == "/clear":
                 self.conversation.clear()
-                print("\nBuddy : Conversation cleared. 🧹")
+                UI.success("Conversation cleared. 🧹")
                 continue
 
             if user_input.lower() == "exit":
-                print("\nBuddy : Goodbye Partner 👋")
+                UI.info("Goodbye Partner 👋")
                 break
 
             # -------- Memory Detection --------
@@ -51,12 +50,12 @@ class Buddy:
 
             # -------------------------------
 
-            # Store user message in conversation
+            # Store user message
             self.conversation.add_user_message(user_input)
 
             # Load Buddy's long-term memory
             memory_context = self.memory.get_memory_context()
-            
+
             print("\nBuddy : ", end="", flush=True)
 
             full_response = ""
