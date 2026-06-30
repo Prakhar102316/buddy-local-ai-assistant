@@ -7,10 +7,10 @@ class OllamaClient:
         self.model = model
 
     def generate(self, messages):
-        print("\n========== MESSAGES SENT TO OLLAMA ==========")
-        for message in messages:
-            print(message)
-        print("=============================================\n")
+       # print("\n========== MESSAGES SENT TO OLLAMA ==========")
+       # for message in messages:
+       #     print(message)
+       # print("=============================================\n")
 
         response = chat(
             model=self.model,
@@ -24,11 +24,6 @@ class OllamaClient:
     # -------------------------
 
     def stream_generate(self, messages):
-
-        print("\n========== MESSAGES SENT TO OLLAMA ==========")
-        for message in messages:
-            print(message)
-        print("=============================================\n")
 
         stream = chat(
             model=self.model,

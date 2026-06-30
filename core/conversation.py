@@ -15,6 +15,7 @@ class Conversation:
         ]
 
     def add_user_message(self, message):
+
         self.messages.append(
             {
                 "role": "user",
@@ -23,6 +24,7 @@ class Conversation:
         )
 
     def add_assistant_message(self, message):
+
         self.messages.append(
             {
                 "role": "assistant",
@@ -30,8 +32,21 @@ class Conversation:
             }
         )
 
-    def get_messages(self):
-        return self.messages
+    def get_messages(self, memory_context=""):
+
+        messages = self.messages.copy()
+
+        if memory_context:
+
+            messages.insert(
+                1,
+                {
+                    "role": "system",
+                    "content": memory_context
+                }
+            )
+
+        return messages
 
     def clear(self):
 

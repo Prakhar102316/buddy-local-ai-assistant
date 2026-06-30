@@ -5,6 +5,36 @@ All notable changes to **Buddy** will be documented in this file.
 The format is based on **Keep a Changelog**, and this project follows **Semantic Versioning** where applicable.
 
 ---
+## [0.4] - 2026-06-30
+
+### Added
+
+* Long-term persistent memory using `buddy_memory.json`
+* Automatic memory detection from user messages
+* Automatic memory saving
+* Memory retrieval across sessions
+* Context injection for personalized responses
+* Streaming response generation
+* `MemoryManager` module
+* `MemoryDetector` module
+
+### Improved
+
+* Modular architecture with dedicated memory components
+* Personalized responses using stored user information
+* Cleaner response generation pipeline
+
+### Fixed
+
+* Buddy now remembers information after `/clear`
+* Fixed memory integration into conversations
+* Corrected prompt injection order
+
+### Removed
+
+* Development debug logs (`MESSAGES SENT TO OLLAMA`)
+* Memory context debug output
+
 
 ## [0.3.0] - 2026-06-30
 

@@ -18,7 +18,7 @@
 | v0.1    | Local AI Integration using Ollama | ✅ Completed |
 | v0.2    | Conversation Memory & Personality | ✅ Completed |
 | v0.3    | Streaming Responses               | ✅ Completed |
-| v0.4    | Long-Term Memory                  | ⏳ Planned   |
+| v0.4    | Long-Term Memory                  | ✅ Completed |
 | v0.5    | Voice Interaction                 | ⏳ Planned   |
 | v1.0    | Stable Release                    | ⏳ Planned   |
 
@@ -592,3 +592,125 @@ Buddy generating streamed responses.
 * Personal Information Retrieval
 
 ---
+# Version 0.4
+
+## Date
+
+30 June 2026
+
+---
+
+## Objective
+
+Implement Buddy's long-term memory system, enabling it to remember user information across different sessions while maintaining a clean and modular software architecture.
+
+---
+
+## Features Completed
+
+### Streaming Responses
+
+* Implemented real-time token streaming from Ollama for a smoother conversational experience.
+
+### Memory Manager
+
+* Developed a dedicated `MemoryManager` responsible for loading, saving and formatting persistent memory.
+
+### Memory Detector
+
+* Implemented automatic detection of user-provided personal information.
+
+### Persistent Storage
+
+* Introduced `buddy_memory.json` to permanently store user memories.
+
+### Context Injection
+
+* Implemented automatic injection of stored memories into the system prompt before every conversation.
+
+### Long-Term Memory
+
+* Buddy can now remember user information even after restarting the application or clearing the conversation.
+
+---
+
+## Architecture Improvements
+
+Buddy now follows a modular architecture consisting of:
+
+* Buddy
+* Prompt Manager
+* Conversation Manager
+* Ollama Client
+* Memory Manager
+* Memory Detector
+
+Each module has a single responsibility, improving maintainability and scalability.
+
+---
+
+## Challenges Faced
+
+### Memory Integration
+
+Although memory was being stored successfully, Buddy initially failed to retrieve it because the stored information was not being injected into the conversation context.
+
+**Resolution**
+
+Implemented context injection by inserting partner information as a secondary system message before every interaction with Ollama.
+
+---
+
+### Debugging
+
+Several integration issues were identified during testing, including missing context variables and incorrect conversation reconstruction.
+
+Systematic debugging and verification of the data flow resolved these issues.
+
+---
+
+## Testing Performed
+
+Successfully verified:
+
+* Memory detection
+* Memory storage
+* Persistent JSON storage
+* Memory retrieval
+* Context injection
+* Conversation reset using `/clear`
+* Retrieval after application restart
+* Streaming responses
+
+---
+
+## Lessons Learned
+
+* Persistent memory is independent from conversation history.
+* Context injection is an effective method for personalizing Large Language Model responses.
+* Modular architecture greatly simplifies debugging and future expansion.
+* Careful validation of data flow is essential when integrating multiple components.
+
+---
+
+## Current Status
+
+Buddy v0.4 now supports:
+
+* Local AI using Ollama
+* Streaming responses
+* Conversation memory
+* Persistent long-term memory
+* Automatic memory detection
+* Context injection
+* Personalized responses across sessions
+
+---
+
+## Next Development Goals
+
+* Memory editing and deletion
+* Duplicate memory prevention
+* Configuration management
+* Voice interaction
+* Graphical user interface

@@ -1,5 +1,7 @@
 from core.ollama_client import OllamaClient
 from core.conversation import Conversation
+from core.memory_manager import MemoryManager
+from core.memory_detector import MemoryDetector
 
 
 class Buddy:
@@ -7,10 +9,13 @@ class Buddy:
     def __init__(self):
 
         self.name = "Buddy"
-        self.version = "0.2"
+        self.version = "0.3"
 
         self.client = OllamaClient()
         self.conversation = Conversation()
+
+        self.memory = MemoryManager()
+        self.detector = MemoryDetector()
 
     def start(self):
 
@@ -25,7 +30,6 @@ class Buddy:
 
             if user_input.lower() == "/clear":
                 self.conversation.clear()
-                print(self.conversation.get_messages())
                 print("\nBuddy : Conversation cleared. 🧹")
                 continue
 
@@ -33,21 +37,37 @@ class Buddy:
                 print("\nBuddy : Goodbye Partner 👋")
                 break
 
-            # Store user message
+            # -------- Memory Detection --------
+
+            memory = self.detector.detect(user_input)
+
+            if memory:
+
+                memories = self.memory.load_memory()
+
+                memories[memory["key"]] = memory["value"]
+
+                self.memory.save_memory(memories)
+
+            # -------------------------------
+
+            # Store user message in conversation
             self.conversation.add_user_message(user_input)
 
-            # Stream Buddy's response
+            # Load Buddy's long-term memory
+            memory_context = self.memory.get_memory_context()
+            
             print("\nBuddy : ", end="", flush=True)
 
             full_response = ""
 
             for chunk in self.client.stream_generate(
-                self.conversation.get_messages()
+                self.conversation.get_messages(memory_context)
             ):
                 print(chunk, end="", flush=True)
                 full_response += chunk
 
             print()
 
-            # Save assistant response
+            # Store assistant response
             self.conversation.add_assistant_message(full_response)
