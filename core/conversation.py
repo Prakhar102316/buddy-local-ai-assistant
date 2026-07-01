@@ -56,3 +56,6 @@ class Conversation:
                 "content": self.prompt_manager.get_system_prompt()
             }
         ]
+    def get_message_count(self):
+
+        return len(self.messages)

@@ -5,6 +5,31 @@ All notable changes to **Buddy** will be documented in this file.
 The format is based on **Keep a Changelog**, and this project follows **Semantic Versioning** where applicable.
 
 ---
+## [0.5] - 2026-07-02
+
+### Added
+
+* Rich terminal interface using Rich
+* `/help` command with formatted command list
+* `/model` command to display current AI configuration
+* `/about` command with Buddy information
+* `/version` command showing Buddy version details
+* Rich banner and improved startup screen
+
+### Improved
+
+* Cleaner terminal conversation interface
+* Better command-line user experience
+* Consistent UI styling across all commands
+* Improved project organization
+* Removed development debug output
+
+### Fixed
+
+* Memory retrieval after conversation clear
+* Various indentation and UI issues
+* Conversation display formatting
+
 ## [0.4] - 2026-06-30
 
 ### Added

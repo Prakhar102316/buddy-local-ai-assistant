@@ -714,3 +714,24 @@ Buddy v0.4 now supports:
 * Configuration management
 * Voice interaction
 * Graphical user interface
+
+Version: v0.5
+
+Milestone Achieved:
+First polished public-ready release.
+
+Completed:
+- Rich terminal interface
+- Long-term memory
+- Command system
+- About page
+- Version page
+- Model information
+- Help system
+- Stable memory persistence
+
+Notes:
+Buddy now feels like a real desktop CLI assistant rather than a prototype.
+
+Next Goal:
+Begin development of Buddy AI v0.6.

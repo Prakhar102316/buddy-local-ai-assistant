@@ -14,7 +14,7 @@ class UI:
         banner = Align.center(
             "[bold cyan]🤖 Buddy AI[/bold cyan]\n\n"
             "[white]Your Personal Local AI Assistant[/white]\n\n"
-            "[green]Version 0.5[/green]"
+            "[green]Version 0.6[/green]"
         )
 
         console.print(
@@ -73,17 +73,17 @@ class UI:
         table = Table(
             title="📖 Buddy Commands",
             border_style="cyan",
-            header_style="bold cyan",
-            show_lines=False
-        ) 
+            header_style="bold cyan"
+        )
 
         table.add_column("Command", style="green", no_wrap=True)
         table.add_column("Description", style="white")
 
         table.add_row("/help", "Show all available commands")
         table.add_row("/clear", "Clear the current conversation")
-        table.add_row("/model", "Show the current AI configuration")
-        table.add_row("/about", "Information about Buddy AI")
+        table.add_row("/model", "Show current AI configuration")
+        table.add_row("/memory", "Show all saved memories")
+        table.add_row("/about", "About Buddy AI")
         table.add_row("/version", "Show Buddy version")
         table.add_row("exit", "Exit Buddy")
 
@@ -129,6 +129,7 @@ class UI:
         )
 
         console.print()
+
     @staticmethod
     def show_version(version):
 
@@ -140,7 +141,7 @@ class UI:
             header_style="bold cyan"
         )
 
-        table.add_column("Property", style="green", no_wrap=True)
+        table.add_column("Property", style="green")
         table.add_column("Value", style="white")
 
         table.add_row("Application", "Buddy AI")
@@ -151,3 +152,86 @@ class UI:
 
         console.print(table)
         console.print()
+
+    @staticmethod
+    def show_memory(memories):
+
+        console.print()
+
+        console.print("[bold cyan]🧠 Buddy Memory[/bold cyan]\n")
+
+        if not memories:
+            console.print("[yellow]No memories stored yet.[/yellow]\n")
+            return
+
+        table = Table(
+            border_style="cyan",
+            header_style="bold cyan"
+        )
+
+        table.add_column("Memory", style="green")
+        table.add_column("Value", style="white")
+
+        for key, value in memories.items():
+            pretty_key = key.replace("_", " ").title()
+            table.add_row(pretty_key, str(value))
+
+        console.print(table)
+
+        console.print(f"\n[bold]Total Memories[/bold] : {len(memories)}")
+
+        console.print()
+    
+    @staticmethod
+    def show_search_results(results):
+        console.print()
+
+        console.print("[bold cyan]🔍 Search Results[/bold cyan]\n")
+        if not results:
+
+            UI.error("No matching memories found.")
+
+            console.print()
+
+            return
+        table = Table(
+            border_style="cyan",
+            header_style="bold cyan"
+        )
+        table.add_column("Memory", style="green")
+        table.add_column("Value", style="white")
+        for key, value in results.items():
+
+            table.add_row(
+                key.replace("_", " ").title(),
+                str(value)
+            )
+
+        console.print(table)
+
+        console.print()
+
+    @staticmethod
+    def show_stats(total_memories, total_messages, version, model):
+
+        console.print()
+
+        table = Table(
+            title="📊 Buddy Statistics",
+            border_style="cyan",
+            header_style="bold cyan"
+
+        )
+        table.add_column("Property", style="green")
+        table.add_column("Value", style="white")
+
+        table.add_row("Total Memories", str(total_memories))
+        table.add_row("Conversation Messages", str(total_messages))
+        table.add_row("Buddy Version", version)
+        table.add_row("AI Model", model)
+        table.add_row("Memory Status", "Enabled")
+
+        console.print(table)
+
+        console.print()
+

@@ -43,3 +43,56 @@ class MemoryManager:
 
         return context
 
+    def get_all_memories(self):
+        """
+        Returns all saved memories as a dictionary.
+        """
+        return self.load_memory()
+    def remember(self, key, value):
+
+        memories = self.load_memory()
+
+        memories[key] = value
+ 
+        self.save_memory(memories)
+
+    def forget(self, key):
+
+        memories = self.load_memory()
+
+        if key in memories:
+
+            del memories[key]
+
+            self.save_memory(memories)
+
+            return True
+
+        return False
+
+    def edit(self, key, value):
+
+        memories = self.load_memory()
+
+        if key in memories:
+
+            memories[key] = value
+
+            self.save_memory(memories)
+
+            return True
+
+        return False
+    def search_memory(self, query):
+        memories = self.load_memory()
+
+        results = {}
+
+        query = query.lower()
+
+        for key, value in memories.items():
+            if query in key.lower() or query in str(value).lower():
+
+                results[key] = value
+
+        return results
