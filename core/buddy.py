@@ -29,11 +29,29 @@ class Buddy:
 
             if user_input.lower() == "/clear":
                 self.conversation.clear()
-                UI.success("Conversation cleared. 🧹")
+                UI.success(
+                    "Conversation cleared. Ready for a fresh start, Partner! 🧹"
+                )
+                continue
+
+            if user_input.lower() == "/help":
+                UI.show_help()
+                continue
+
+            if user_input.lower() == "/model":
+                UI.show_model(self.client.model)
+                continue
+            
+            if user_input.lower() == "/about":
+                UI.show_about(self.version)
+                continue
+            
+            if user_input.lower() == "/version":
+                UI.show_version(self.version)
                 continue
 
             if user_input.lower() == "exit":
-                UI.info("Goodbye Partner 👋")
+                UI.info("See you soon, Partner! 👋")
                 break
 
             # -------- Memory Detection --------
@@ -56,7 +74,7 @@ class Buddy:
             # Load Buddy's long-term memory
             memory_context = self.memory.get_memory_context()
 
-            print("\nBuddy : ", end="", flush=True)
+            UI.buddy_prefix()
 
             full_response = ""
 
