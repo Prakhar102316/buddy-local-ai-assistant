@@ -2,6 +2,8 @@ from core.ollama_client import OllamaClient
 from core.conversation import Conversation
 from core.memory_manager import MemoryManager
 from core.memory_detector import MemoryDetector
+from core.memory_search import MemorySearch
+from core.question_classifier import QuestionClassifier
 from core.ui import UI
 
 
@@ -14,6 +16,8 @@ class Buddy:
 
         self.client = OllamaClient()
         self.conversation = Conversation()
+        self.search_engine = MemorySearch()
+        self.classifier = QuestionClassifier()
 
         self.memory = MemoryManager()
         self.detector = MemoryDetector()
@@ -126,7 +130,7 @@ class Buddy:
                 )
                 continue
 
-            
+
             if user_input.lower() == "/memory":
                 memories = self.memory.get_all_memories()
                 UI.show_memory(memories)
@@ -160,7 +164,14 @@ class Buddy:
 
             self.conversation.add_user_message(user_input)
 
-            memory_context = self.memory.get_memory_context()
+            self.conversation.add_user_message(user_input)
+
+            intent = self.classifier.classify(user_input)
+
+            if intent == "PERSONAL":
+                memory_context = self.search_engine.get_relevant_context(user_input)
+            else:
+                memory_context = ""
 
             UI.buddy_prefix()
 

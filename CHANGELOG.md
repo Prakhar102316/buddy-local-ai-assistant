@@ -5,6 +5,163 @@ All notable changes to **Buddy** will be documented in this file.
 The format is based on **Keep a Changelog**, and this project follows **Semantic Versioning** where applicable.
 
 ---
+
+[0.8] - 2026-07-02
+
+## Overview
+
+Version 0.8 marks Buddy's transition from a terminal-based AI assistant to a desktop application with its own graphical user interface. This is the largest user-facing update since the project began.
+
+---
+
+## Added
+
+### GUI Foundation
+
+* Introduced Flet-based desktop interface.
+* Created a modular GUI architecture.
+* Added:
+
+  * Main Window
+  * Sidebar
+  * Chat Area
+  * Input Bar
+  * Centralized Style Manager
+
+### Backend Integration
+
+* Connected the GUI with Buddy's backend.
+* Chat messages are now processed through the existing AI pipeline.
+* Backend now powers the GUI instead of the terminal.
+
+### Chat System
+
+* User messages appear in dedicated chat bubbles.
+* Buddy responses appear in separate assistant bubbles.
+* Automatic scrolling to the latest message.
+
+### Project Structure
+
+* New `gui/` module added.
+* Separated UI components into individual files.
+* Improved maintainability through modular design.
+
+---
+
+## Improvements
+
+* Preserved all existing backend capabilities:
+
+  * Memory System
+  * Memory Search
+  * Question Classifier
+  * Conversation History
+  * Ollama Integration
+  * Prompt Management
+
+* Backend now works seamlessly with both terminal and GUI environments.
+
+---
+
+## Known Issues
+
+* Buddy responses are displayed after generation completes instead of streaming token-by-token.
+* GUI briefly blocks while the model generates long responses.
+* Streaming architecture has been postponed to **v0.9** for a complete implementation.
+
+---
+
+## Statistics
+
+* New GUI framework integrated.
+* Modular desktop interface completed.
+* Backend successfully connected to GUI.
+* Buddy officially transitions from a console application to a desktop AI assistant.
+
+---
+
+## Next Version
+
+### v0.9 — Performance & Professional UX
+
+Planned improvements:
+
+* True streaming responses
+* Zero GUI freezing
+* Background response generation
+* Typing indicator
+* Improved responsiveness
+* General GUI polish
+
+
+## [0.7] - 2026-07-01
+
+### Added
+- Intelligent Question Classifier
+- Intelligent Memory Search Engine
+- Keyword extraction for personal queries
+- Stop-word filtering for improved search accuracy
+- Synonym normalization (favorite ↔ favourite)
+- Ranked memory retrieval
+- Relevant context injection into prompts
+- Smarter retrieval pipeline for personal memories
+
+### Improved
+- Personal questions now retrieve only relevant memories
+- General questions bypass memory search completely
+- Reduced unnecessary prompt context
+- Improved response accuracy for stored memories
+
+### Fixed
+- Fixed memory retrieval failures caused by keyword mismatch
+- Fixed British/American spelling differences during retrieval
+- Improved retrieval scoring for better memory matching
+
+### Internal
+- Introduced QuestionClassifier module
+- Introduced MemorySearch module
+- Refactored Buddy architecture into an intelligent retrieval pipeline
+- Improved modularity and maintainability
+
+
+## [v0.6] - 2026-07-01
+
+### Added
+
+* Added `/memory` command to display all stored memories.
+* Added `/remember` command to manually save memories.
+* Added `/forget` command to remove saved memories.
+* Added `/edit` command to update existing memories.
+* Added `/search` command to search memories by keyword.
+* Added `/stats` command to display Buddy statistics.
+
+### Improved
+
+* Redesigned `/help` using Rich tables.
+* Improved `/about` screen.
+* Improved `/version` screen.
+* Better formatted memory display.
+* Cleaner command-line interface.
+
+### Memory System
+
+* Manual memory management.
+* Automatic memory detection.
+* Memory search capability.
+* Memory statistics.
+
+### Fixed
+
+* Fixed multiple indentation issues.
+* Fixed UI rendering problems.
+* Fixed command handling bugs.
+* Fixed memory display issues.
+
+### ✅ QA Status
+
+* Full command testing completed successfully.
+* Stable release verified.
+
 ## [0.5] - 2026-07-02
 
 ### Added

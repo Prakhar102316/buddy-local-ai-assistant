@@ -19,7 +19,11 @@
 | v0.2    | Conversation Memory & Personality | ✅ Completed |
 | v0.3    | Streaming Responses               | ✅ Completed |
 | v0.4    | Long-Term Memory                  | ✅ Completed |
-| v0.5    | Voice Interaction                 | ⏳ Planned   |
+| v0.5    | UI & Commands                     | ✅ Completed |
+| v0.6    | Complete Memory Management        | ✅ Completed |
+| v0.7    | Smart Memory Retrieval            | ✅ Completed |
+| v0.8    | Desktop GUI (PySide6)             | ✅ Completed |
+| v0.9    | Productivity Features             | ⏳ Planned   |
 | v1.0    | Stable Release                    | ⏳ Planned   |
 
 ---
@@ -735,3 +739,350 @@ Buddy now feels like a real desktop CLI assistant rather than a prototype.
 
 Next Goal:
 Begin development of Buddy AI v0.6.
+
+# Development Log
+
+## Date
+
+1 July 2026
+
+## Version
+
+Buddy AI v0.6
+
+## Session Summary
+
+Today's development focused on completing Buddy's memory management system.
+
+### Features Implemented
+
+* /memory
+* /remember
+* /forget
+* /edit
+* /search
+* /stats
+
+### UI Improvements
+
+* Redesigned Help Menu
+* Improved About Screen
+* Improved Version Screen
+* Better Memory Tables
+* Better Command Formatting
+
+### Testing
+
+Performed complete QA testing on all commands.
+
+Verified:
+
+* Memory creation
+* Memory editing
+* Memory deletion
+* Memory searching
+* Statistics
+* Conversation clearing
+* Model display
+* Version display
+* About screen
+
+Result:
+
+✅ All tests passed successfully.
+
+### Notes
+
+Buddy v0.6 is now considered feature complete and ready for release.
+
+Development now moves to Buddy v0.7, which introduces the Smart Memory Retrieval Engine.
+
+# Development Log
+
+## Version 0.7
+
+Release Date:
+1 July 2026
+
+---
+
+Objective
+
+Transform Buddy from a simple memory-based chatbot into an AI assistant capable of intelligently deciding when and how to use stored memories.
+
+---
+
+Features Developed
+
+✔ Question Classification
+
+Implemented a dedicated QuestionClassifier capable of identifying whether a user query is:
+
+- Personal
+- General
+
+This prevents unnecessary memory retrieval during general conversations.
+
+---
+
+✔ Intelligent Memory Search
+
+Created a dedicated MemorySearch module responsible for retrieving only the most relevant memories based on the user's query.
+
+Implemented:
+
+- Keyword extraction
+- Stop-word removal
+- Synonym normalization
+- Ranked memory retrieval
+
+---
+
+✔ Retrieval Pipeline
+
+Designed a new processing pipeline:
+
+User Query
+
+↓
+
+Question Classifier
+
+↓
+
+Memory Search (Personal Queries Only)
+
+↓
+
+Relevant Context Injection
+
+↓
+
+Ollama
+
+↓
+
+Response
+
+This significantly improves response quality and reduces irrelevant context.
+
+---
+
+Testing
+
+QA testing included:
+
+✔ Personal questions
+✔ General questions
+✔ Memory deletion validation
+✔ Context injection validation
+✔ Retrieval accuracy
+
+All core functionality successfully passed testing.
+
+---
+
+Architecture Improvements
+
+Buddy is now composed of modular components:
+
+- Ollama Client
+- Conversation Manager
+- Memory Manager
+- Memory Detector
+- Memory Search
+- Question Classifier
+- User Interface
+
+Each module follows a single responsibility design.
+
+---
+
+Result
+
+Buddy successfully evolved from a memory-enabled chatbot into an intelligent AI assistant with contextual memory retrieval.
+
+
+## Version 0.8 — Graphical User Interface
+
+---
+
+## Objective
+
+The goal of Version 0.8 was to transform Buddy from a terminal-based AI assistant into a desktop application with its own graphical interface while preserving all existing backend capabilities.
+
+Unlike previous versions, this update focused almost entirely on improving user interaction rather than adding new AI functionality.
+
+---
+
+# Phase 1 — GUI Planning
+
+### Decision
+
+Selected **Flet** as the GUI framework.
+
+### Reasons
+
+* Python-native framework.
+* Simple deployment.
+* Cross-platform support.
+* Modern interface.
+* Future possibility of mobile deployment.
+
+---
+
+# Phase 2 — GUI Architecture
+
+A new GUI module was introduced.
+
+```
+gui/
+│
+├── main_window.py
+├── sidebar.py
+├── chat_area.py
+├── input_bar.py
+├── styles.py
+```
+
+Responsibilities were separated to keep the interface modular and maintainable.
+
+---
+
+# Phase 3 — Desktop Window
+
+Implemented:
+
+* Main application window
+* Dark theme
+* Fixed desktop layout
+* Sidebar
+* Chat panel
+* Input bar
+
+Buddy officially became a desktop application.
+
+---
+
+# Phase 4 — Backend Integration
+
+Integrated the existing AI backend with the graphical interface.
+
+Connected:
+
+* BuddyBackend
+* Conversation Manager
+* Memory System
+* Question Classifier
+* Ollama Client
+
+No backend functionality was removed.
+
+The GUI became another interface for the same AI engine previously used by the terminal version.
+
+---
+
+# Phase 5 — Chat Interface
+
+Implemented:
+
+* User message bubbles
+* Buddy message bubbles
+* Automatic scrolling
+* Separate message alignment
+
+Conversation history now appears visually rather than inside the terminal.
+
+---
+
+# Phase 6 — Streaming Investigation
+
+Attempted to implement token-by-token streaming similar to ChatGPT.
+
+### Investigation Results
+
+Verified that:
+
+* Ollama streams correctly.
+* qwen2.5-coder streams correctly.
+* buddy-fast streams correctly.
+* Backend streaming functions correctly.
+
+Discovered that the remaining issue originates from GUI update scheduling rather than model generation.
+
+---
+
+# Phase 7 — Threading Experiment
+
+Introduced ResponseWorker to move AI generation into a background thread.
+
+Result:
+
+✔ GUI freezing eliminated.
+
+However:
+
+* Live token streaming still did not appear correctly.
+* GUI updates require a framework-specific approach.
+
+Conclusion:
+
+The architecture is moving in the correct direction, but the final streaming implementation will be completed in Version 0.9.
+
+---
+
+# Known Issues
+
+* Responses are displayed after generation instead of token-by-token.
+* Streaming architecture requires further refinement.
+* Typing indicator not yet implemented.
+
+These have been officially moved to Version 0.9.
+
+---
+
+# Lessons Learned
+
+1. GUI development introduces challenges different from backend AI development.
+
+2. Separating interface logic from AI logic greatly improves maintainability.
+
+3. Threading alone does not guarantee smooth GUI updates.
+
+4. Framework-specific behavior must be understood before implementing asynchronous streaming.
+
+---
+
+# Overall Result
+
+Version 0.8 successfully transformed Buddy from:
+
+```
+Terminal AI
+```
+
+into
+
+```
+Desktop AI Assistant
+```
+
+This represents one of the largest milestones in the entire Buddy project.
+
+---
+
+# Next Version
+
+## Version 0.9 — Performance & Professional UX
+
+Highest Priority:
+
+* True streaming responses.
+* Thread-safe GUI updates.
+* Typing indicator.
+* Zero interface freezing.
+* Overall performance optimization.
+
+Version 0.9 will focus on making Buddy feel as responsive and polished as commercial AI desktop applications.
+
+

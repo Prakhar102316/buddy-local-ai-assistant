@@ -32,5 +32,9 @@ class OllamaClient:
         )
 
         for chunk in stream:
-            yield chunk["message"]["content"]
 
+            text = chunk["message"]["content"]
+
+            print(repr(text))      # <-- Add this line
+
+            yield text
