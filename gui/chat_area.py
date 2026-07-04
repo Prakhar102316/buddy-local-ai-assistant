@@ -77,3 +77,5 @@ class ChatArea(ft.Container):
     def update_buddy_message(self, chunk):
 
         self.current_buddy_text.value += chunk
+
+        
