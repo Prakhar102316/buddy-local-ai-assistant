@@ -5,6 +5,58 @@ All notable changes to **Buddy** will be documented in this file.
 The format is based on **Keep a Changelog**, and this project follows **Semantic Versioning** where applicable.
 
 ---
+Changelog
+
+All notable changes to Buddy - Local AI Assistant will be documented in this file.
+
+---
+
+[v0.9] - 2026-07-04
+
+🚀 Added
+
+- Implemented real-time response streaming.
+- Added incremental token-by-token response rendering.
+- Introduced streaming support throughout the chat interface.
+- Improved responsiveness during AI generation.
+
+🔧 Changed
+
+- Replaced thread-based UI execution with Flet asynchronous task execution ("page.run_task()").
+- Optimized the chat rendering pipeline for smooth updates.
+- Improved synchronization between the backend streaming generator and the frontend UI.
+
+🐛 Fixed
+
+- Fixed the issue where AI responses only appeared after:
+  - Minimizing/maximizing the window.
+  - Switching windows (Alt + Tab).
+- Fixed delayed UI repaint during streaming.
+- Eliminated response buffering caused by the previous thread-based execution model.
+
+🧪 Investigation
+
+- Isolated the repaint issue using multiple minimal Flet test applications.
+- Verified that the backend, Ollama streaming, and memory pipeline were functioning correctly.
+- Identified the GUI execution model as the root cause.
+
+📈 Performance
+
+- Streaming now begins immediately after the first generated token.
+- Improved perceived response speed.
+- Reduced UI latency during long responses.
+
+💾 Project Status
+
+Current capabilities:
+
+- Local AI using Ollama
+- Conversation history
+- Memory management
+- Memory retrieval
+- Question classification
+- Real-time AI streaming
+
 
 [0.8] - 2026-07-02
 

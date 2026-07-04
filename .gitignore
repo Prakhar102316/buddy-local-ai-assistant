@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environments
+.venv/
+.venv313/
+venv/
+
+# VS Code
+.vscode/
+
+# JetBrains
+.idea/
+
+# Environment files
+.env
+
+# Logs
+*.log
+
+# Build
+build/
+dist/
+
+# Flet
+.flet/
+
+# OS
+Thumbs.db
+.DS_Store

@@ -23,7 +23,7 @@
 | v0.6    | Complete Memory Management        | ✅ Completed |
 | v0.7    | Smart Memory Retrieval            | ✅ Completed |
 | v0.8    | Desktop GUI (PySide6)             | ✅ Completed |
-| v0.9    | Productivity Features             | ⏳ Planned   |
+| v0.9    | Productivity Features             |    |
 | v1.0    | Stable Release                    | ⏳ Planned   |
 
 ---
@@ -1084,5 +1084,135 @@ Highest Priority:
 * Overall performance optimization.
 
 Version 0.9 will focus on making Buddy feel as responsive and polished as commercial AI desktop applications.
+
+
+Version 0.9 — Real-Time Streaming
+
+Date: 2026-07-04
+
+Objective
+
+Implement true real-time response streaming so Buddy displays responses word-by-word instead of waiting for the complete LLM response.
+
+Initial Problem
+
+Buddy generated responses correctly but the UI remained frozen until:
+
+Window was minimized/maximized
+Window focus changed (Alt + Tab)
+
+The complete response appeared only after Windows forced a repaint.
+
+Investigation Process
+
+Several debugging experiments were performed:
+
+1. Backend Verification
+Verified Ollama streaming API.
+Confirmed chunks were arriving correctly.
+Confirmed stream_generate() yielded tokens immediately.
+
+Result: Backend working correctly.
+
+2. Minimal Streaming Test
+
+Created a minimal Flet application to isolate the problem.
+
+Result:
+
+Streaming still failed.
+
+This proved the issue was not Buddy-specific.
+
+3. Counter Test (Thread-Based)
+
+Implemented a simple counter using:
+
+page.run_thread()
+page.update()
+
+Observed behavior:
+
+Counter only updated after Alt + Tab.
+Window repaint was delayed.
+
+Conclusion:
+
+UI updates from worker threads were not being repainted correctly.
+
+4. Async Counter Test
+
+Implemented the same counter using:
+
+page.run_task()
+asyncio
+
+Observed behavior:
+
+Counter updated continuously.
+No repaint delay.
+No window refresh required.
+
+Conclusion:
+
+Flet's asynchronous task scheduler handled UI updates correctly.
+
+Root Cause
+
+The repaint issue was caused by using:
+
+page.run_thread()
+
+instead of
+
+page.run_task().
+
+The Buddy backend, Ollama streaming implementation, and memory pipeline were functioning correctly. The issue originated from the GUI execution model.
+
+Solution
+
+The GUI streaming pipeline was refactored to use:
+
+page.run_task()
+asynchronous UI scheduling
+regular page.update() calls
+
+The backend architecture remained unchanged.
+
+Outcome
+
+Buddy now supports:
+
+Real-time response streaming
+Smooth incremental token display
+Responsive chat interface
+Stable streaming behavior without requiring window repaint events
+Lessons Learned
+Always isolate bugs using minimal reproducible examples.
+Avoid assuming the backend is at fault before testing the UI independently.
+Flet's preferred long-running execution model is asynchronous (page.run_task()), not worker threads.
+Project Status
+
+Version: v0.9
+
+Features Completed
+Local AI integration
+Conversation management
+Memory retrieval
+Memory storage
+Personality detection
+Real-time response streaming
+
+Next Milestone (v1.0)
+
+Planned improvements:
+
+Voice input
+Voice output
+Better memory ranking
+Image understanding
+Improved UI animations
+Git repository cleanup (.gitignore)
+Production-ready release
 
 
