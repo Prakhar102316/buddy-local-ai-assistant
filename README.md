@@ -1,134 +1,231 @@
-    # 🤖 Buddy
+🤖 Buddy
 
-### An Open-Source, Privacy-First Local AI Assistant
+Privacy-First Offline Personal AI Companion
 
-Buddy is a locally hosted AI Assistant built using **Ollama**, **Docker**, and **Open WebUI**. The project focuses on providing a secure, customizable, and offline-capable Artificial Intelligence platform that allows users to interact with Large Language Models without relying entirely on cloud-based services.
+Buddy is an open-source, offline-first AI companion designed to run entirely on your local machine. Unlike cloud-based AI assistants, Buddy keeps conversations, memories, and reasoning on your own computer, giving you complete control over your data while providing a fast and highly customizable AI experience.
 
-Buddy was initially developed as a BCA major project and is designed to evolve continuously into a practical AI platform for learning, productivity, and software development.
-
----
-
-# 🌟 Features
-
-* 🖥️ Runs AI models locally using Ollama
-* 🔒 Privacy-first architecture
-* 🌐 Docker-based deployment
-* 💬 Clean web interface using Open WebUI
-* 🧠 Multiple custom AI personalities
-* 📚 Educational and productivity focused
-* ⚙️ Modular and extensible architecture
-* 🐧 Linux-friendly development environment
+Originally developed as a BCA major project, Buddy is evolving into a long-term personal AI platform focused on productivity, learning, cybersecurity, software development, and everyday assistance.
 
 ---
 
-# 🛠️ Technologies Used
+✨ Features
 
-* Ollama
-* Docker
-* Open WebUI
-* Linux (Fedora)
-* Git & GitHub
-* Markdown
-* Large Language Models (LLMs)
-
----
-
-# 🎯 Project Objectives
-
-* Build a fully functional Local AI Assistant.
-* Protect user privacy by processing data locally.
-* Learn modern AI deployment technologies.
-* Create an open-source educational project.
-* Continuously improve Buddy with new features.
+- 🧠 Local AI powered by Ollama
+- 💬 Beautiful desktop chat interface built with Flet
+- ⚡ Real-time response streaming
+- 📝 Persistent conversation history
+- 🧩 Long-term memory retrieval
+- 🎯 Intelligent question classification
+- 🔒 100% privacy-first (no cloud dependency)
+- 🌐 Works completely offline after setup
+- 🛠 Modular architecture for future expansion
 
 ---
 
-# 📂 Project Structure
+🛠 Tech Stack
 
-```text
+AI
+
+- Ollama
+- Custom Modelfiles
+- Sentence Transformers
+- ChromaDB
+
+Frontend
+
+- Flet
+
+Backend
+
+- Python
+- Async Streaming
+- Thread-safe architecture
+
+Memory
+
+- ChromaDB
+- Embedding Search
+- Persistent Storage
+
+Development
+
+- Git
+- GitHub
+- Docker (optional)
+- Fedora Linux
+- Windows
+
+---
+
+🏗 Project Architecture
+
+User
+   │
+   ▼
+Flet Desktop GUI
+   │
+   ▼
+Buddy Backend
+   │
+   ├── Conversation Manager
+   ├── Memory Manager
+   ├── Memory Search
+   ├── Question Classifier
+   └── Ollama Client
+             │
+             ▼
+      Local LLM (Ollama)
+
+---
+
+📂 Project Structure
+
 Buddy/
-├── .github/
-├── assets/
-├── config/
-├── docker/
-├── docs/
-├── Modelfiles/
+│
+├── core/
+├── gui/
+├── memory/
 ├── prompts/
+├── models/
 ├── report/
+├── assets/
 ├── screenshots/
+│
+├── buddy_gui.py
 ├── README.md
-├── LICENSE
 ├── CHANGELOG.md
-├── CONTRIBUTING.md
+├── LICENSE
 └── .gitignore
-```
 
 ---
 
-# 🚀 Roadmap
+🚀 Development Roadmap
 
-## Version 0.1 – Foundation
+✅ v0.1 — Project Foundation
 
-* Local AI setup
-* Ollama integration
-* Docker deployment
-* Open WebUI configuration
-
-## Version 0.2 – Documentation
-
-* GitHub repository
-* Project documentation
-* Screenshots
-* README improvements
-
-## Version 0.3 – Productivity
-
-* Better prompts
-* Enhanced AI personalities
-* Improved user experience
-
-## Version 0.4 – Knowledge
-
-* Retrieval-Augmented Generation (RAG)
-* Document understanding
-* Knowledge base support
-
-## Version 0.5 – Voice
-
-* Voice interaction
-* Speech-to-text
-* Text-to-speech
-
-## Version 1.0 – BCA Release
-
-* Stable release for academic submission
-* Complete documentation
-* Optimized deployment
+- Project setup
+- Ollama integration
+- Initial backend
 
 ---
 
-# 📖 Documentation
+✅ v0.2 — Core Backend
 
-The complete technical documentation for Buddy is available in the `report/` directory.
-
----
-
-# 🤝 Contributing
-
-Buddy is currently under active development. Contributions, suggestions, and feedback will be welcomed in future releases.
+- Conversation system
+- Backend architecture
+- Modular project structure
 
 ---
 
-# 📄 License
+✅ v0.3 — Memory System
+
+- Persistent memory
+- ChromaDB integration
+- Memory retrieval
+
+---
+
+✅ v0.4 — Question Classification
+
+- Intent detection
+- Context-aware memory search
+
+---
+
+✅ v0.5 — Desktop GUI
+
+- Flet interface
+- Sidebar
+- Chat window
+- Input bar
+
+---
+
+✅ v0.6 — Personality & Conversation
+
+- Conversation history
+- AI personality improvements
+
+---
+
+✅ v0.7 — Stability
+
+- Code cleanup
+- Performance improvements
+- Backend optimization
+
+---
+
+✅ v0.8 — Memory Optimization
+
+- Improved retrieval
+- Better conversation flow
+- Faster responses
+
+---
+
+✅ v0.9 — Pulse ❤️
+
+- Real-time response streaming
+- Async UI rendering
+- Smooth chat experience
+- Major GUI responsiveness improvements
+
+---
+
+🚧 v1.0 — Production Release
+
+Planned features:
+
+- Voice input
+- Voice output
+- Image understanding
+- Plugin architecture
+- Better memory ranking
+- Cross-platform packaging
+- Mobile companion support
+- Production-ready documentation
+
+---
+
+🎯 Project Vision
+
+Buddy aims to become a complete offline AI companion capable of assisting with:
+
+- Software Development
+- Cybersecurity
+- Learning
+- Research
+- Productivity
+- Daily Planning
+- Personal Knowledge Management
+
+while ensuring user privacy and complete local ownership of data.
+
+---
+
+📖 Documentation
+
+Detailed technical documentation is available in the "report/" directory.
+
+---
+
+🤝 Contributing
+
+Buddy is under active development. Contributions, bug reports, feature requests, and discussions are welcome as the project matures.
+
+---
+
+📜 License
 
 This project is licensed under the MIT License.
 
 ---
 
-# 👨‍💻 Developer
+👨‍💻 Developer
 
-**Prakhar Pandey**
+Prakhar Pandey
 
 Bachelor of Computer Applications (Data Science & AI)
 
-Developing Buddy as a long-term open-source Local AI Assistant.
+Building Buddy as a long-term open-source, privacy-first AI companion.
