@@ -1,0 +1,7 @@
+flet
+ollama
+sounddevice
+scipy
+faster-whisper
+ctranslate2
+numpy
